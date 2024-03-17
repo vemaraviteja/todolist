@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body{
+        background-image: url("./Images/login2.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    
+      form{
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+      }
+      .main{
+        /* border:2px solid black; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 400px;
+        height: 300px;
+        background-color: rgba(77, 143, 118, 0.6);
+        margin-top: 150px;
+        border-radius: 10px;    
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div class="main">  
+    <form action="">
+      <label for="" style="font-size: xx-large;">Sign Up Here</label><br>
+      <input type="text" placeholder="username" required  ><br>
+      <input type="password" placeholder="password" required /><br>
+      <input type="password" placeholder="Re-typePassword" required /><br>
+      <input type="submit" /><br>
+    </form>
+    <button><a href="./project2.html" style="text-decoration: none;" target="_blank">Skip To Login</a></button>
+  </div>
+
+    <script>
+      var f = document.forms;
+      var arr = [];
+
+      function usernameExists(username){
+        return arr.some(item => item.username === username);
+      }
+      f[0].addEventListener("submit", function (e) {
+        e.preventDefault();
+       
+        var pass = {
+          username: e.target[0].value,
+          password: e.target[1].value,
+          retype: e.target[2].value,
+        };
+        // console.log(pass);
+
+        var upperCase = /[!@#$%^&*?</>]/g;
+        var numbers = /[0-9]/g;
+        var upperCaseLetters =/[A-Z]/g;
+        var lowerCaseLetters = /[a-z]/g;
+
+       
+        if(pass.password.match(upperCase) && pass.password.match(numbers) && pass.password.match(upperCaseLetters) && pass.password.match(lowerCaseLetters) && pass.password.length>8){
+            if(!usernameExists(pass.username)){
+                if(pass.password === pass.retype){
+                    arr.push(pass);
+                    window.location.assign("./project2.html");
+                }
+            }
+            else{
+                alert("alerady there");
+            }
+        }
+        else{
+            alert("please enter above 8 chARCTERS includes 'CAPITAL,SMALL,SPECIALCHARACTERS,NUMBERS'   ")
+        }
+   
+    console.log(arr);
+      window.localStorage.setItem("logindetails",JSON.stringify(arr));
+        e.target[0].value = "";
+        e.target[1].value = "";
+        e.target[2].value = "";
+      });
+    </script>
+  </body>
+</html>

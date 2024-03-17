@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url("./Images/login4.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .main{
+            margin-top: 100px;
+            border: 2px solid black;
+            width: 300px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color:rgb(128, 0, 0);
+            background-color: red;
+            background-color: rgba(120, 63, 54,0.5);
+        }
+    </style>
+</head>
+<body>
+<marquee behavior="" direction=""><h1 style="color: bisque;">!!!! PLASE LOGIN IN WITH CORRECT CREDNTIALS !!!!!</h1></marquee>
+
+<button style="width: 200px;"><a href="./index.html" style="text-decoration: none;color: black;font-size: x-large;">Sign-in</a></button>
+<div class="main">  
+    <h2>Login Here</h2>
+    <form action="">
+        <input type="text" placeholder="userName" required><br><br>
+        <input type="password" placeholder="password" required><br><br>
+        <input type="submit">
+    </form>
+</div>
+<script>
+    var f= document.forms;
+    f[0].addEventListener("submit",(e)=>{
+        e.preventDefault();
+        var userName= e.target[0].value;
+        var password= e.target[1].value;
+        var det = localStorage.getItem("logindetails");
+        var details = JSON.parse(det);
+        console.log(details);
+        for(i=0;i<details.length;i++){
+            if(  (userName == details[i]["username"]) && (password == details[i]["password"]) ){
+                window.location.assign("./TodoList.html");
+            }
+            else{
+                alert("please check your credentials")
+            }
+        }
+
+        e.target[0].value="";
+        e.target[1].value="";
+    })
+</script>
+
+</body>
+</html>
